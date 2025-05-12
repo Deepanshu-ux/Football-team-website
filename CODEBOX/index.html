@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login / Signup - JCC Football</title>
+  <style>
+    body {
+      background: url('jcc.webp') no-repeat center center fixed;
+      background-size: cover;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-box {
+      background-color: rgba(0, 0, 0, 0.75);
+      padding: 30px;
+      border-radius: 10px;
+      width: 320px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .tabs button {
+      flex: 1;
+      padding: 10px;
+      font-weight: bold;
+      background-color: #1f1f1f;
+      color: #fdd835;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .tabs button.active {
+      background-color: #fdd835;
+      color: #000;
+    }
+
+    .form {
+      display: none;
+    }
+
+    .form.active {
+      display: block;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    .password-wrapper input {
+      padding-right: 40px;
+    }
+
+    .password-wrapper span {
+      position: absolute;
+      right: 10px;
+      top: 12px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button.submit {
+      background-color: #fdd835;
+      color: #000;
+      padding: 10px 20px;
+      border: none;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+
+    .success {
+      color: lime;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <div class="tabs">
+      <button class="active" onclick="showTab('login')">Login</button>
+      <button onclick="showTab('signup')">Sign Up</button>
+    </div>
+
+    <!-- Login Form -->
+    <div id="login" class="form active">
+      <input type="text" id="login-username" placeholder="Username">
+      <div class="password-wrapper">
+        <input type="password" id="login-password" placeholder="Password">
+        <span onclick="togglePassword('login-password', this)">👁</span>
+      </div>
+      <button class="submit" onclick="login()">Login</button>
+      <p id="login-error" class="error"></p>
+    </div>
+
+    <!-- Signup Form -->
+    <div id="signup" class="form">
+      <input type="text" id="signup-username" placeholder="Choose Username">
+      <div class="password-wrapper">
+        <input type="password" id="signup-password" placeholder="Choose Password">
+        <span onclick="togglePassword('signup-password', this)">👁</span>
+      </div>
+      <button class="submit" onclick="signup()">Sign Up</button>
+      <p id="signup-msg" class="success"></p>
+    </div>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.form').forEach(f => f.classList.remove('active'));
+      document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function togglePassword(inputId, iconElement) {
+      const input = document.getElementById(inputId);
+      if (input.type === "password") {
+        input.type = "text";
+        iconElement.textContent = "🙈";
+      } else {
+        input.type = "password";
+        iconElement.textContent = "👁";
+      }
+    }
+
+    function login() {
+      const username = document.getElementById('login-username').value;
+      const password = document.getElementById('login-password').value;
+      const stored = JSON.parse(localStorage.getItem('users')) || [];
+
+      const found = stored.find(u => u.username === username && u.password === password);
+      if (found) {
+        localStorage.setItem('loggedIn', 'true');
+        window.location.href = 'home.html';
+      } else {
+        document.getElementById('login-error').innerText = 'Invalid credentials';
+      }
+    }
+
+    function signup() {
+      const username = document.getElementById('signup-username').value;
+      const password = document.getElementById('signup-password').value;
+
+      if (!username || !password) {
+        document.getElementById('signup-msg').innerText = 'Please fill in both fields';
+        return;
+      }
+
+      let users = JSON.parse(localStorage.getItem('users')) || [];
+      const exists = users.find(u => u.username === username);
+
+      if (exists) {
+        document.getElementById('signup-msg').innerText = 'Username already exists';
+        return;
+      }
+
+      users.push({ username, password });
+      localStorage.setItem('users', JSON.stringify(users));
+      document.getElementById('signup-msg').innerText = 'Signup successful! Please log in.';
+    }
+  </script>
+
+</body>
+</html>

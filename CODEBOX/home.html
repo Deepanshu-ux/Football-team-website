@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <script>
+    if (localStorage.getItem('loggedIn') !== 'true') {
+      window.location.href = 'index.html'; // redirect if not logged in
+    }
+  </script>
+  <a href="#" onclick="logout()">Logout</a>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JCC Football Team</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        header {
+            background-color: #1f1f1f;
+            color: #fdd835;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        nav {
+            background-color: #212121;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        nav a {
+            margin: 0 20px;
+            color: #fdd835;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .players {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .player-card {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 15px;
+            width: calc(33.333% - 20px);
+            box-shadow: 0 0 10px rgba(255,255,255,0.05);
+            transition: transform 0.2s;
+        }
+
+        .player-card:hover {
+            transform: scale(1.02);
+        }
+
+        .player-card img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background-color: #1f1f1f;
+            color: #aaaaaa;
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid #333;
+        }
+
+        a {
+            color: #fdd835;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .player-card {
+                width: 100%;
+            }
+        }
+
+        /* Login Form Styling */
+        .login-form {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        .login-form label,
+        .login-form input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .login-form input {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .login-form button {
+            background-color: #fdd835;
+            color: #000;
+            padding: 10px 20px;
+            border: none;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-button {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .login-button a {
+            background-color: #fdd835;
+            color: #000;
+            padding: 12px 25px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>College Football Team</h1>
+        <p>Welcome to the official website of our college football team</p>
+    </header>
+
+    <nav>
+        <a href="#about">About</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#players">Players</a>
+        <a href="#contact">Contact</a>
+        <a href="login.html">Login</a>
+        <a href="Register.html">Register</a>
+    </nav>
+
+    <div class="container">
+        <section id="about" class="section">
+            <h2>About the Team</h2>
+            <p>Our college football team has a proud tradition of athleticism, sportsmanship, and camaraderie. Led by experienced coaches, our players train hard and play harder to make our college proud.</p>
+            <img src="real madrid.webp" alt="Team Photo" class="team-photo">
+
+            <!-- Login Form in About Section -->
+            
+        </section>
+
+        <section id="schedule" class="section">
+            <h2>Upcoming Matches</h2>
+            <ul>
+                <li>vs. JIIMS SEC-5 - Sept 10, 2025</li>
+                <li>vs. JIIMS NOIDA - Sept 17, 2025</li>
+                <li>vs. VIIPS PITAMPURA - Oct 01, 2025</li>
+            </ul>
+        </section>
+
+        <section id="players" class="section">
+            <h2>Meet the Players</h2>
+            <div class="players">
+                <div class="player-card">
+                    <img src="raphina.jpg" alt="Player 1">
+                    <h3>RAPHINHA</h3>
+                    <p>Quarterback - #10</p>
+                </div>
+                <div class="player-card">
+                    <img src="Neymar.jpg" alt="Player 2">
+                    <h3>NEYMAR.JR</h3>
+                    <p>Linebacker - #45</p>
+                </div>
+                <div class="player-card">
+                    <img src="Rodrygo.jpg" alt="Player 3">
+                    <h3>RODRYGO</h3>
+                    <p>Running Back - #22</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <h2>Contact Us</h2>
+            <p>Email: <a href="mailto:jccfootball@college.edu">jccfootball@college.edu</a></p>
+            <p>Phone: 8178685920</p>
+            <form action="https://formspree.io/f/{form_id}" method="post">
+                <label for="email">Your Email</label>
+                <input name="Email" id="email" type="email">
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <!-- Login Button After Contact -->
+        <div class="login-button">
+            <a href="login.html">Login to Your Account</a>
+        </div>
+   
+        <script>
+            function logout() {
+              localStorage.removeItem('loggedIn');
+              window.location.href = 'index.html';
+            }
+          </script>
+           
+   
+    <footer>
+        <p>&copy; 2025 College Football Team. All rights reserved.</p>
+    </footer>
+</body>
+</html>
